@@ -1,45 +1,73 @@
-import { Text, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import Home from "./screens/Home";
-import Details from "./screens/Details";
-import Register from "./screens/Register";
-import AccountType from "./screens/AccountType";
+import { useState, useEffect, useCallback } from "react";
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { normalize } from "./Helpers";
+import Welcome from "./screens/Welcome";
+import SignUp from "./screens/SignUp";
+import Login from "./screens/Login";
+import VerifyAccount from "./screens/VerifyAccount";
+import ResetPassword from "./screens/ResetPassword";
+import ConfirmAccount from "./screens/ConfirmAccount";
+import WelcomeMessage from "./screens/WelcomeMessage";
+import Success from "./screens/Success";
+import * as Font from "expo-font";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
-const theme = {
-  ...DefaultTheme,
-  colors: { ...DefaultTheme.colors, background: "transparent" },
-};
+export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
 
-const App = () => {
-  const [loaded] = useFonts({
-    Light: require("./assets/fonts/Poppins-Light.ttf"),
-    Regular: require("./assets/fonts/Poppins-Regular.ttf"),
-    Medium: require("./assets/fonts/Poppins-Medium.ttf"),
-    SemiBold: require("./assets/fonts/Poppins-SemiBold.ttf"),
-    Thin: require("./assets/fonts/Poppins-Thin.ttf"),
-    ExtraBold: require("./assets/fonts/Poppins-ExtraBold.ttf"),
-    ExtraLight: require("./assets/fonts/Poppins-ExtraLight.ttf"),
-    Bold: require("./assets/fonts/Poppins-Bold.ttf"),
-  });
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync({
+          Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
+          PoppinsBold: require("./assets/fonts/Poppins-Bold.ttf"),
+          PoppinsSemiBold: require("./assets/fonts/Poppins-SemiBold.ttf"),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
+    prepare();
+  }, []);
 
-  if (!loaded) return null;
-  return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="Home"
-      >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="AccountType" component={AccountType} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+  if (appIsReady) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="WelcomeMessage"
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Welcome" component={Welcome} />
+            <Stack.Screen name="WelcomeMessage" component={WelcomeMessage} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="ConfirmAccount" component={ConfirmAccount} />
+            <Stack.Screen name="Success" component={Success} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    );
+  } else {
+    return null;
+  }
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    fontSize: normalize(40),
+  },
+});

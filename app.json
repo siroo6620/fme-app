@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "main",
-    "slug": "main",
+    "name": "final",
+    "slug": "final",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/agriculture.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#fff"
+      "image": "./assets/splashcomplete.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#00000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,15 +18,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "androidcom.abs"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "androidcom.abs"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
