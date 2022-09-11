@@ -5,7 +5,6 @@ import { normalize } from "../Helpers";
 const CustomAppHeader = (props) => {
   return (
     <View style={styles.container}>
-      {console.log(props.navigation)}
       <Pressable style={styles.viewLeft} onPress={() => props.navigation.pop()}>
         <Image
           style={styles.image}

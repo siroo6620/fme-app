@@ -2,7 +2,8 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { normalize } from "../Helpers";
 
-const InputField = ({ title }) => {
+const InputField = ({ title, value }) => {
+  const [input, setInput] = value
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputFontSize}>{title}</Text>
@@ -10,6 +11,8 @@ const InputField = ({ title }) => {
         style={styles.input}
         autoCapitalize="none"
         placeholderTextColor="white"
+        value={input}
+        onChangeText={text => setInput(text)}
       />
     </View>
   );
