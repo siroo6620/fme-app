@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Button, Pressable } from "react-native";
 import React, {useState, useEffect } from "react";
-import Layout from "./Layout";
-import { normalize } from "../Helpers";
-import InputField from "../components/InputField";
-import ButtonCustom from "../components/ButtonCustom";
-import {postLogin} from "../requests/auth"
+import Layout from "../Layout";
+import { normalize } from "../../Helpers";
+import InputField from "../../components/InputField";
+import ButtonCustom from "../../components/ButtonCustom";
+import {postLogin} from "../../requests/auth"
 
 const Login = (props) => {
   const [phone, setPhone] = useState('')
@@ -16,7 +16,7 @@ const Login = (props) => {
     }
     postLogin({phone, password})
     .then(res => {
-      console.warn(res)
+      console.warn(res.data)
     })
     .catch(err => {
       console.log(err)
@@ -30,8 +30,8 @@ const Login = (props) => {
           <Text style={styles.signUpText}>Login</Text>
         </View>
         <View style={styles.signUpForm}>
-          <InputField title="Phone Number" value={[phone, setPhone]} />
-          <InputField title="Password" value={[password, setPassword]} />
+          <InputField title="Phone Number" value={[phone, setPhone]} number/>
+          <InputField title="Password" value={[password, setPassword]} secureTextEntry/>
         </View>
         <View style={styles.button}>
           <ButtonCustom title="Procced" onPress={authenticate}/>

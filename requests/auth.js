@@ -7,11 +7,11 @@ export const postLogin = ({phone, password}) => {
   })
 }
 
-export const getCountryCode = () => {
-  return axiosClient.get('/country_code')
+export const getCountries = () => {
+  return axiosClient.get('/countries')
 }
 
-export const verifyAccount = ({code}) => {
+export const postVerifyAccount = ({code}) => {
   return axiosClient.post('/verify', {
     code
   })

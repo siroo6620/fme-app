@@ -1,16 +1,16 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { normalize } from "../Helpers";
 
 const CustomAppHeader = (props) => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.viewLeft} onPress={() => props.navigation.pop()}>
+      <TouchableOpacity style={styles.viewLeft} onPress={() => props.navigation.pop()}>
         <Image
           style={styles.image}
           source={require("../assets/icons/arrow-left-s-line.png")}
         />
-      </Pressable>
+      </TouchableOpacity>
       <View style={styles.viewRight}>
         <Image style={styles.image} source={require("../assets/logo1.png")} />
       </View>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   viewLeft: {
     backgroundColor: "rgb(206, 253, 234)",
     width: "12%",
-    height: "55%",
+    height: normalize(40),
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   viewRight: {
     width: "15%",
-    height: "50%",
+    height: normalize(40),
     position: "relative",
     justifyContent: "center",
     alignItems: "center",

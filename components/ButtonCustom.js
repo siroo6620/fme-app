@@ -1,16 +1,14 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { normalize } from "../Helpers";
 
 const ButtonCustom = (props) => {
   return (
-    <View style={styles.container}>
-      <Pressable onPress={props.onPress} style={styles.pressable}>
-        <Text {...props} style={styles.button}>
-          {props.title}
-        </Text>
-      </Pressable>
-    </View>
+    <TouchableOpacity onPress={props.onPress} style={styles.container}>
+      <Text {...props} style={styles.button}>
+        {props.title}
+      </Text>
+    </TouchableOpacity>
   );
 };
 

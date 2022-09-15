@@ -19,17 +19,34 @@ const DropDownCountry = forwardRef((props, ref) => {
       <SelectDropdown
         data={props.data}
         onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
           props.setCountry(selectedItem);
         }}
         buttonTextAfterSelection={(selectedItem, index) => {
           // text represented after item is selected
           // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem;
+
+          if (props.type === "countries") {
+            return selectedItem.country_code
+          } else if (props.type === "cropType") {
+            return selectedItem.farm
+          } else if (props.type === "serviceType") {
+            return selectedItem.service
+          }
+
+          return selectedItem
         }}
         rowTextForSelection={(item, index) => {
           // text represented for each item in dropdown
           // if data array is an array of objects then return item.property to represent item in dropdown
+
+          if (props.type === "countries") {
+            return (item.country_code +" "+ item.country)
+          } else if (props.type === "cropType") {
+            return item.farm
+          } else if (props.type === "serviceType") {
+            return item.service
+          }
+
           return item;
         }}
         buttonStyle={styles.dropdown1BtnStyle}

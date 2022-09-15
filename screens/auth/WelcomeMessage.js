@@ -7,9 +7,9 @@ import {
   StatusBar,
 } from "react-native";
 import React from "react";
-import { normalize } from "../Helpers";
+import { normalize } from "../../Helpers";
 import { useFocusEffect } from "@react-navigation/native";
-import ButtonCustom from "../components/ButtonCustom";
+import ButtonCustom from "../../components/ButtonCustom";
 
 const WelcomeMessage = (props) => {
   const { navigation } = props;
@@ -18,33 +18,35 @@ const WelcomeMessage = (props) => {
     <ImageBackground
       style={styles.image}
       resizeMode="cover"
-      source={require("../assets/fmeapp.png")}
+      source={require("../../assets/fmeapp.png")}
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
             style={styles.imageMain}
             resizeMode="cover"
-            source={require("../assets/logo1.png")}
+            source={require("../../assets/logo1.png")}
           />
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>
-            Hi 👋 Welcome to the Farming Made Easy App!
-          </Text>
-        </View>
-        <View style={styles.gap}></View>
-        <View style={styles.buttonContainer}>
-          <ButtonCustom
-            onPress={() => navigation.navigate("Login")}
-            style={styles.button}
-            title="Login"
-          />
-          <View style={styles.button}></View>
-          <ButtonCustom
-            title="Sign Up"
-            onPress={() => navigation.navigate("Welcome")}
-          />
+        <View style={styles.section}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>
+              Hi 👋 Welcome to the Farming Made Easy App!
+            </Text>
+          </View> 
+          <View style={styles.buttonContainer}>
+            <ButtonCustom
+              onPress={() => navigation.navigate("Login")}
+              style={styles.button}
+              title="Login"
+            />
+            <View style={styles.button}></View>
+            <ButtonCustom
+              title="Sign Up"
+              onPress={() => navigation.navigate("Welcome")}
+            />
+          </View>
+          <View style={styles.gap}></View>
         </View>
       </View>
     </ImageBackground>
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     margin: normalize(10),
   },
   textContainer: {
-    width: "60%",
+    width: "80%",
   },
   text: {
     letterSpacing: 1,
@@ -87,6 +89,10 @@ const styles = StyleSheet.create({
     width: normalize(100),
     height: normalize(100),
   },
+  section: {
+    flex: 1,
+    justifyContent: "space-evenly"
+  }
 });
 
 export default WelcomeMessage;

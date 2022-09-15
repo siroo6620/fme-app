@@ -1,48 +1,52 @@
-import { Text, StyleSheet, View, Image, Pressable } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
-import CustomAppHeader from "../components/CustomAppHeader";
-import { normalize } from "../Helpers";
+import CustomAppHeader from "../../components/CustomAppHeader";
+import { normalize } from "../../Helpers";
+import { userRoles } from "../../constants/users";
 
 const Welcome = (props) => {
   return (
     <View style={styles.container}>
       <CustomAppHeader {...props} />
       <View style={styles.textImageContainer}>
-        <Image style={styles.image} source={require("../assets/rice.png")} />
+        <Image style={styles.image} source={require("../../assets/rice.png")} />
         <Text style={styles.text}>What will you be using the FME App for?</Text>
       </View>
       <View style={styles.tileContainer}>
         <Tile
           navigation={props.navigation}
           title="Farmer"
-          source={require("../assets/Farmer.png")}
+          source={require("../../assets/Farmer.png")}
+          role={userRoles.farmer}
         />
         <Tile
           navigation={props.navigation}
           title="Service Provider"
-          source={require("../assets/Officeworker.png")}
+          source={require("../../assets/Officeworker.png")}
+          role={userRoles.serviceProvider}
         />
         <Tile
           navigation={props.navigation}
           title="Agent"
-          source={require("../assets/Mechanic.png")}
+          source={require("../../assets/Mechanic.png")}
+          role={userRoles.agent}
         />
       </View>
     </View>
   );
 };
 
-const Tile = ({ title, source, navigation }) => {
+const Tile = ({ title, source, navigation, role }) => {
   return (
-    <Pressable
-      onPress={() => navigation.navigate("SignUp")}
+    <TouchableOpacity
+      onPress={() => navigation.navigate("SignUp", { role })}
       style={styles.tileContent}
     >
       <View style={styles.tileImageContainer}>
         <Image style={styles.tileImage} source={source} />
       </View>
       <Text style={styles.tileText}>{title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

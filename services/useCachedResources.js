@@ -3,6 +3,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 import { Asset } from 'expo-asset';
+import Images from '../constants/images'
 
 // import Images from '../constants/Images'
 
@@ -17,7 +18,7 @@ export default function useCachedResources() {
 
         // Load fonts & Assets
         await Promise.all([
-            // Asset.loadAsync([...Images]),
+            Asset.loadAsync([...Images]),
             Font.loadAsync({
                 ...Ionicons.font,
                 Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
