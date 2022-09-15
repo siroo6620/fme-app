@@ -5,7 +5,7 @@ import { normalize } from "../Helpers";
 const ButtonCustom = (props) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={props.onPress}>
+      <Pressable onPress={props.onPress} style={styles.pressable}>
         <Text {...props} style={styles.button}>
           {props.title}
         </Text>
@@ -17,6 +17,11 @@ const ButtonCustom = (props) => {
 export default ButtonCustom;
 
 const styles = StyleSheet.create({
+  pressable: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     marginTop: normalize(5),
     backgroundColor: "rgb(1, 148, 68)",
@@ -25,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: normalize(15),
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
   },
   button: {
     fontSize: normalize(16),
