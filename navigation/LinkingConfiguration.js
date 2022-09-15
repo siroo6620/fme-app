@@ -1,7 +1,7 @@
 import * as Linking from 'expo-linking';
 
 export default {
-  prefixes: [Linking.createURL('/')],
+  prefixes: [Linking.makeUrl('/')],
   config: {
     Root: {
       path: 'app',

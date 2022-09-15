@@ -1,6 +1,5 @@
 node_modules/
 .expo/
-.expo-shared/
 dist/
 npm-debug.*
 *.jks
@@ -14,3 +13,6 @@ yarn.lock
 package-lock.json
 # macOS
 .DS_Store
+
+package-lock.json
+yarn.lock
