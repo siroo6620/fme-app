@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Layout from "./Layout";
-import { normalize } from "../Helpers";
-import InputField from "../components/InputField";
-import ButtonCustom from "../components/ButtonCustom";
+import Layout from "../Layout";
+import { normalize } from "../../Helpers";
+import InputField from "../../components/InputField";
+import ButtonCustom from "../../components/ButtonCustom";
 
 const ResetPassword = (props) => {
   return (

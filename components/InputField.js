@@ -2,8 +2,18 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { normalize } from "../Helpers";
 
-const InputField = ({ title, value }) => {
+const InputField = ({ title, value, secureTextEntry, number }) => {
   const [input, setInput] = value
+
+  const setInputValue = (text) => {
+    if (number) {
+      if (isNaN(text)) {
+          // Its not a number
+      } else setInput(text)
+    } else { 
+      setInput(text)
+    }
+  }
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputFontSize}>{title}</Text>
@@ -12,7 +22,9 @@ const InputField = ({ title, value }) => {
         autoCapitalize="none"
         placeholderTextColor="white"
         value={input}
-        onChangeText={text => setInput(text)}
+        onChangeText={text => setInputValue(text)}
+        secureTextEntry={secureTextEntry ? true: false}
+        keyboardType={number ? 'numeric': "default"}
       />
     </View>
   );

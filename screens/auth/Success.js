@@ -7,9 +7,9 @@ import {
   StatusBar,
 } from "react-native";
 import React from "react";
-import { normalize } from "../Helpers";
+import { normalize } from "../../Helpers";
 import { useFocusEffect } from "@react-navigation/native";
-import ButtonCustom from "../components/ButtonCustom";
+import ButtonCustom from "../../components/ButtonCustom";
 
 const Success = (props) => {
   const { navigation } = props;
@@ -20,7 +20,7 @@ const Success = (props) => {
         <Image
           style={styles.imageMain}
           resizeMode="cover"
-          source={require("../assets/logo1.png")}
+          source={require("../../assets/logo1.png")}
         />
       </View>
       <Text>Success Logo not Found </Text>

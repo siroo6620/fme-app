@@ -1,27 +1,21 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import React from "react";
-import Layout from "./Layout";
-import { normalize } from "../Helpers";
-import InputField from "../components/InputField";
-import ButtonCustom from "../components/ButtonCustom";
+import Layout from "../Layout";
+import { normalize } from "../../Helpers";
+import InputField from "../../components/InputField";
+import ButtonCustom from "../../components/ButtonCustom";
 
-const VerifyAccount = (props) => {
+const ConfirmAccount = () => {
   return (
-    <Layout {...props}>
+    <Layout>
       <View style={styles.container}>
         <View>
           <Text style={styles.signUpText}>Verify Account</Text>
         </View>
         <View>
           <Text style={styles.signUpTextSub}>
-            Enter the Six digit code sent to your phone number
+            Please confirm you own this account, input the verfification code
+            sent to your phone number
           </Text>
         </View>
         <View style={styles.otp}>
@@ -34,10 +28,7 @@ const VerifyAccount = (props) => {
         </View>
 
         <View style={styles.button}>
-          <ButtonCustom
-            onPress={() => props.navigation.navigate("Success")}
-            title="Procced"
-          />
+          <ButtonCustom title="Procced" />
         </View>
       </View>
     </Layout>
@@ -55,7 +46,7 @@ const InputTile = () => {
   );
 };
 
-export default VerifyAccount;
+export default ConfirmAccount;
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +55,8 @@ const styles = StyleSheet.create({
   },
 
   signUpTextSub: {
-    marginVertical: normalize(5),
+    marginVertical: normalize(10),
+    marginTop: normalize(30),
     fontFamily: "PoppinsSemiBold",
     fontSize: normalize(17),
     color: "rgb(88, 137, 119)",
@@ -85,7 +77,7 @@ const styles = StyleSheet.create({
 
   otp: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     marginVertical: normalize(20),
   },
 

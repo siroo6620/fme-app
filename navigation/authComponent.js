@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Welcome from "../screens/Welcome";
-import SignUp from "../screens/SignUp";
-import Login from "../screens/Login";
-import VerifyAccount from "../screens/VerifyAccount";
-import ResetPassword from "../screens/ResetPassword";
-import ConfirmAccount from "../screens/ConfirmAccount";
-import WelcomeMessage from "../screens/WelcomeMessage";
-import Success from "../screens/Success";
+import Welcome from "../screens/auth/Welcome";
+import SignUp from "../screens/auth/SignUp";
+import Login from "../screens/auth/Login";
+import VerifyAccount from "../screens/auth/VerifyAccount";
+import ResetPassword from "../screens/auth/ResetPassword";
+import ConfirmAccount from "../screens/auth/ConfirmAccount";
+import WelcomeMessage from "../screens/auth/WelcomeMessage";
+import Success from "../screens/auth/Success";
 
 const Stack = createStackNavigator();
 const INITIAL_ROUTE_NAME = 'WelcomeMessage';
