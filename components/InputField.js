@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
-import { normalize } from "../Helpers";
+import { normalize } from "../services";
 
 const InputField = ({ title, value, secureTextEntry, number }) => {
   const [input, setInput] = value

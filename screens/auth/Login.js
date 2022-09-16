@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button, Pressable } from "react-native";
 import React, {useState, useEffect } from "react";
-import Layout from "../Layout";
-import { normalize } from "../../Helpers";
+import Layout from "../../components/Layout";
+import { normalize } from "../../services";
 import InputField from "../../components/InputField";
 import ButtonCustom from "../../components/ButtonCustom";
 import {postLogin} from "../../requests/auth"

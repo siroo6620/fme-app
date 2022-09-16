@@ -1,11 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { NetworkProvider, ReduxNetworkProvider } from "react-native-offline"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { NavigationContainer } from "@react-navigation/native"
 import useCachedResources from './services/useCachedResources'
-import { normalize } from "./Helpers";
+import { PersistGate } from "redux-persist/integration/react"
+import { SafeAreaView } from "react-native-safe-area-context"
 import AuthComponent from "./navigation/authComponent";
+import { toastConfig } from "./services/toastConfig";
+import Toast from "react-native-toast-message";
+import { store, persistor} from './store'
+import { normalize } from "./services"
+import { Provider } from "react-redux"
 
 const Stack = createNativeStackNavigator();
 
@@ -17,16 +24,25 @@ export default function App() {
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="WelcomeMessage"
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="Auth" component={AuthComponent} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ReduxNetworkProvider>
+              <NetworkProvider>
+                <NavigationContainer>
+                  <Stack.Navigator
+                    initialRouteName="WelcomeMessage"
+                    screenOptions={{
+                      headerShown: false,
+                    }}
+                  >
+                    <Stack.Screen name="Auth" component={AuthComponent} />
+                  </Stack.Navigator>
+                </NavigationContainer>
+              </NetworkProvider>
+            </ReduxNetworkProvider>
+          </PersistGate>
+        </Provider>
+        <Toast config={toastConfig} visibilityTime={2000}/>
       </SafeAreaView>
     );
   }

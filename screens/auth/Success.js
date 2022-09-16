@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import React from "react";
-import { normalize } from "../../Helpers";
+import { normalize } from "../../services";
 import { useFocusEffect } from "@react-navigation/native";
 import ButtonCustom from "../../components/ButtonCustom";
 

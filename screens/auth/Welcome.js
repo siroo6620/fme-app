@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
 import CustomAppHeader from "../../components/CustomAppHeader";
-import { normalize } from "../../Helpers";
+import { normalize } from "../../services";
 import { userRoles } from "../../constants/users";
 
 const Welcome = (props) => {

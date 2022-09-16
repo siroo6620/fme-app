@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { normalize } from "../Helpers";
+import { normalize } from "../services";
 import SelectDropdown from "react-native-select-dropdown";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";

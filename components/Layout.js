@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Image } from "react-native";
 import React, { Component } from "react";
-import CustomAppHeader from "../components/CustomAppHeader";
-import { normalize } from "../Helpers";
+import CustomAppHeader from "./CustomAppHeader";
+import { normalize } from "../services";
 
 const Layout = (props) => {
   return (

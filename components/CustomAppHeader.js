@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { normalize } from "../Helpers";
+import { normalize } from "../services";
 
 const CustomAppHeader = (props) => {
   return (

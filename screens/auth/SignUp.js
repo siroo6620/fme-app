@@ -8,20 +8,26 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import Layout from "../Layout";
-import { normalize } from "../../Helpers";
+import Layout from "../../components/Layout";
+import { normalize } from "../../services";
 import InputField from "../../components/InputField";
 import ButtonCustom from "../../components/ButtonCustom";
-import DropDownCountry from "../DropDown";
+import DropDownCountry from "../../components/DropDown";
 import { getServiceTypes, postSignupServiceProvider } from "../../requests/serviceProvider";
 import { getFarmTypes, postSignupFarmer } from "../../requests/farmer";
+import { registerActions } from "../../store/reducers/registerSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { ShowToast } from "../../services/toastConfig";
 import { getCountries } from "../../requests/auth";
 import { userRoles } from "../../constants/users";
+import Loader from "../../components/Loader";
 
 const SignUp = (props) => {
   const { role } = props.route.params
-  const cropTypeList = ["Cassava", "Yam", "Cassava", "Yam", "Cassava"];
   
+  const { farmTypes, serviceTypes, countries } = useSelector(state => state.register)
+  const dispatch = useDispatch()
+
   const [name, setName] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [phone, setPhone] = useState("");
@@ -29,34 +35,34 @@ const SignUp = (props) => {
   const [serviceType, setServiceType] = useState("")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [serviceTypes, setServiceTypes] = useState([]);
-  const [countries, setCountries] = useState([])
-  const [farmTypes, setFarmTypes] = useState([]);
+  // const [serviceTypes, setServiceTypes] = useState([]);
+  // const [countries, setCountries] = useState([])
+  // const [farmTypes, setFarmTypes] = useState([]);
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
-    getFarmTypes()
-      .then((res) => {
-        setFarmTypes(res.data);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+    const fetchData = async () => {
 
-    getServiceTypes()
-      .then((res) => {
-        setServiceTypes(res.data.data);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
-    
-    getCountries()
-      .then((res) => {
-        setCountries(res.data.data)
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+      try {
+        setLoader(true)
+        let res = await getFarmTypes()
+        if (res.data) dispatch(registerActions.setFarmTypes(res.data))
+
+        res = await getServiceTypes()
+        if (res.data) dispatch(registerActions.setServiceTypes(res.data.data))
+        
+        res = await getCountries()
+        if (res.data) dispatch(registerActions.setCountries(res.data.data))
+
+        setLoader(false)
+      } catch (e) {
+        console.warn(e)
+        setLoader(false)
+        ShowToast.error("Network Error")
+      }
+    }
+
+    fetchData()
 
   }, [])
 
@@ -158,6 +164,7 @@ const SignUp = (props) => {
 
   return (
     <Layout {...props}>
+      {loader && <Loader visible={loader} />}
       <KeyboardAvoidingView style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
