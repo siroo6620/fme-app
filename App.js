@@ -42,7 +42,7 @@ export default function App() {
             </ReduxNetworkProvider>
           </PersistGate>
         </Provider>
-        <Toast config={toastConfig} visibilityTime={2000}/>
+        <Toast config={toastConfig} visibilityTime={3000} position="bottom"/>
       </SafeAreaView>
     );
   }

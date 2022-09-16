@@ -63,67 +63,68 @@ const SignUp = (props) => {
     }
 
     fetchData()
-
   }, [])
 
   const authenticate = async () => {
     if (!name || !countryCode || !phone || !password || !confirmPassword) {
-      console.warn("Please provide the necessary information")
+      ShowToast.error("Please provide the necessary information")
       return
     }
 
     if (isNaN(Number(phone))) {
-      console.warn("Invalid phone number entered")
+      ShowToast.error("Invalid phone number entered")
       return
     }
 
     if (password != confirmPassword) {
-      console.warn("Passwords do not match")
+      ShowToast.error("Passwords do not match")
       return
     }
 
     if (role == userRoles.farmer && !cropType) {
-      console.warn("Please select crop type")
+      ShowToast.error("Please select crop type")
       return
     }
     
     if (role == userRoles.serviceProvider && !serviceType) {
-      console.warn("Please select service type")
+      ShowToast.error("Please select service type")
       return
     }
 
 
     if (role == userRoles.farmer) {
+      const data = {
+        name,
+        phone,
+        password,
+        password_confirmation: confirmPassword,
+        country_code: countryCode.country_code,
+        country: countryCode.country,
+        farm_type: cropType.farm
+      }
 
-      console.log({
-        name,
-        phone,
-        password,
-        password_confirmation: confirmPassword,
-        country_code: countryCode.country_code,
-        country: countryCode.country,
-        farm_type: cropType.farm
-      })
-      postSignupFarmer({
-        name,
-        phone,
-        password,
-        password_confirmation: confirmPassword,
-        country_code: countryCode.country_code,
-        country: countryCode.country,
-        farm_type: cropType.farm
-      })
+      setLoader(true)
+      postSignupFarmer(data)
       .then(res => {
         console.warn(res.data)
+        if (res.data.success) {
+          ShowToast.success("Registeration Successul")
+          props.navigation.navigate("VerifyAccount")
+        } else {
+          ShowToast.error(res.data.error)
+        }
       })
       .catch(e => {
         console.warn(e)
+        ShowToast.error("Something went wrong")
+      })
+      .finally(() => {
+        setLoader(false)
       })
     }
     
     if (role == userRoles.serviceProvider) {
-
-      postSignupServiceProvider({
+      const data = {
         name,
         phone,
         password,
@@ -131,12 +132,24 @@ const SignUp = (props) => {
         country_code: countryCode.country_code,
         country: countryCode.country,
         service_type: serviceType.service
-      })
+      }
+      setLoader(true)
+      postSignupServiceProvider(data)
       .then(res => {
         console.warn(res.data)
+        if (res.data.success) {
+          ShowToast.success("Registeration Successul")
+          props.navigation.navigate("VerifyAccount")
+        } else {
+          ShowToast.error(res.data.error)
+        }
       })
       .catch(e => {
         console.warn(e)
+        ShowToast.error("Something went wrong")
+      })
+      .finally(() => {
+        setLoader(false)
       })
     }
   };
@@ -193,8 +206,8 @@ const SignUp = (props) => {
               <View style={styles.button}>
                 <ButtonCustom
                   title="Procced"
-                  onPress={authenticate}
-                  // onPress={() => props.navigation.navigate("VerifyAccount")}
+                  // onPress={authenticate}
+                  onPress={() => props.navigation.navigate("VerifyAccount")}
                 />
               </View>
             </>

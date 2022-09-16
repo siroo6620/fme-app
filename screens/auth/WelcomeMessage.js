@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -10,9 +11,17 @@ import React from "react";
 import { normalize } from "../../services";
 import { useFocusEffect } from "@react-navigation/native";
 import ButtonCustom from "../../components/ButtonCustom";
+import { useDispatch } from "react-redux";
+import { registerActions } from "../../store/reducers/registerSlice";
+import { ShowToast } from "../../services/toastConfig";
 
 const WelcomeMessage = (props) => {
   const { navigation } = props;
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(registerActions.clearState())
+  }, [])
 
   return (
     <ImageBackground
@@ -36,7 +45,8 @@ const WelcomeMessage = (props) => {
           </View> 
           <View style={styles.buttonContainer}>
             <ButtonCustom
-              onPress={() => navigation.navigate("Login")}
+              // onPress={() => navigation.navigate("Login")}
+              onPress={() => ShowToast.success("testing toast multiline handling")}
               style={styles.button}
               title="Login"
             />

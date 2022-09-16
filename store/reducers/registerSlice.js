@@ -1,22 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    loggedIn: false,
+    farmTypes: [],
+    serviceTypes: [],
+    countries: []
+}
+
 export const registerSlice = createSlice({
     name: "register",
-    initialState: {
-        loggedIn: false,
-        farmTypes: [],
-        serviceTypes: [],
-        countries: []
-    },
+    initialState,
     reducers: {
-        setFarmTypes: (state, action) => {
-            state.farmTypes = action.payload
-        },
         setServiceTypes: (state, action) => {
             state.serviceTypes = action.payload
         },
+        setFarmTypes: (state, action) => {
+            state.farmTypes = action.payload
+        },
         setCountries: (state, action) => {
             state.countries = action.payload
+        },
+        clearState: (state, action) => {
+            state = undefined
         }
     }
 })

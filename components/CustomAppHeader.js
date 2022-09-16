@@ -5,7 +5,12 @@ import { normalize } from "../services";
 const CustomAppHeader = (props) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.viewLeft} onPress={() => props.navigation.pop()}>
+      <TouchableOpacity style={styles.viewLeft} onPress={() => {
+        if (props.customBackHandler) {
+          props.customBackHandler()
+        } else
+          props.navigation.pop()
+      }}>
         <Image
           style={styles.image}
           source={require("../assets/icons/arrow-left-s-line.png")}

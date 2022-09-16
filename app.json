@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "final",
-    "slug": "final",
+    "name": "fms-app",
+    "slug": "fms-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
