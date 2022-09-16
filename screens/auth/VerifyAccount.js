@@ -44,7 +44,7 @@ const VerifyAccount = (props) => {
     })
     .catch(e => {
       console.warn(e)
-      ShowToast.error("Something went wrong")
+      ShowToast.error("Network Error")
     })
     .finally(() => {
       setLoader(false)

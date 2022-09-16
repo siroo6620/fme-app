@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Layout from "../../components/Layout";
@@ -6,6 +7,10 @@ import InputField from "../../components/InputField";
 import ButtonCustom from "../../components/ButtonCustom";
 
 const ResetPassword = (props) => {
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   return (
     <Layout {...props}>
       <View style={styles.container}>
@@ -13,9 +18,13 @@ const ResetPassword = (props) => {
           <Text style={styles.signUpText}>Reset Password</Text>
         </View>
         <View style={styles.signUpForm}>
-          <InputField title="Phone Number" />
-          <InputField title="New Password" />
-          <InputField title="Confirm New Password" />
+          <InputField title="Phone Number" value={[phone, setPhone]} number/>
+          <InputField title="New Password" value={[password, setPassword]} secureTextEntry/>
+          <InputField
+            title="Confirm New Password"
+            value={[confirmPassword, setConfirmPassword]}
+            secureTextEntry={true}
+          />
         </View>
         <View style={styles.button}>
           <ButtonCustom

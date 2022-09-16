@@ -1,0 +1,6 @@
+I've found a scenario that might need fixing. When a user who hasn't verified 
+their account tries to log in, even with an invalid password, the response tells them 
+to verify account. I think it should return "invalid password" or something like that. 
+You can use a different error code so that i can detect and handle it accordingly
+
+how to use user authorize key after log in header

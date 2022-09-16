@@ -45,8 +45,8 @@ const WelcomeMessage = (props) => {
           </View> 
           <View style={styles.buttonContainer}>
             <ButtonCustom
-              // onPress={() => navigation.navigate("Login")}
-              onPress={() => ShowToast.success("testing toast multiline handling")}
+              onPress={() => navigation.navigate("Login")}
+              // onPress={() => ShowToast.success("testing toast multiline handling")}
               style={styles.button}
               title="Login"
             />

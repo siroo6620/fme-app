@@ -4,27 +4,49 @@ import Layout from "../../components/Layout";
 import { normalize } from "../../services";
 import InputField from "../../components/InputField";
 import ButtonCustom from "../../components/ButtonCustom";
+import { ShowToast } from "../../services/toastConfig";
 import {postLogin} from "../../requests/auth"
+import Loader from "../../components/Loader";
+
 
 const Login = (props) => {
+  const [loader, setLoader] = useState(false)
+
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
 
   const authenticate = async () => {
     if (!phone || !password) {
+      ShowToast.error("Please provide necessary information")
       return
     }
+    
+    setLoader(true)
     postLogin({phone, password})
     .then(res => {
-      console.warn(res.data)
+      if (res.data.code === 401 && res.data.success) { // invalid phone / password
+        ShowToast.error(res.data.message)
+      } else if (res.data.code === 401 && !res.data.success) { //verify account
+        ShowToast.error(res.data.message)
+        props.navigation.navigate("VerifyAccount", { fromLogin: true })
+      } else if (res.data.code === 200) {
+        ShowToast.success("Login Successful")
+        console.warn(res.data)
+      }
+      // console.warn(res.data)
     })
     .catch(err => {
-      console.log(err)
+      console.warn(err)
+      ShowToast.error("Network Error")
+    })
+    .finally(() => {
+      setLoader(false)
     })
   }
 
   return (
     <Layout {...props}>
+      {loader && <Loader visible={loader} />}
       <View style={styles.container}>
         <View>
           <Text style={styles.signUpText}>Login</Text>

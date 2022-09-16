@@ -116,7 +116,7 @@ const SignUp = (props) => {
       })
       .catch(e => {
         console.warn(e)
-        ShowToast.error("Something went wrong")
+        ShowToast.error("Network Error")
       })
       .finally(() => {
         setLoader(false)
@@ -206,8 +206,8 @@ const SignUp = (props) => {
               <View style={styles.button}>
                 <ButtonCustom
                   title="Procced"
-                  // onPress={authenticate}
-                  onPress={() => props.navigation.navigate("VerifyAccount")}
+                  onPress={authenticate}
+                  // onPress={() => props.navigation.navigate("VerifyAccount")}
                 />
               </View>
             </>
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     marginTop: normalize(10),
   },
   button: {
-    marginTop: normalize(10),
+    marginTop: normalize(30),
     width: "60%",
   },
 });
